@@ -10,7 +10,7 @@ public class EmergencySupplyNetwork {
     public EmergencySupplyNetwork(){
         matriceCout();
         affichage();
-        Allocation allocation = new Allocation();
+        //Allocation allocation = new Allocation();
     }
 
     public List<List<Double>> getMatriceDeCout() {
@@ -50,7 +50,7 @@ public class EmergencySupplyNetwork {
     private void affichage() {
         String title = "Graph Representation (Cost Matrix): ";
         int citySpace = String.valueOf(getCitySpace()).length() + 12;
-        int warehouseSpace = String.valueOf(getWarehouseNameSpace()).length() + 13;
+        int warehouseSpace = String.valueOf(getWarehouseNameSpace()).length() + 14;
 
         System.out.println(title);
         System.out.println(getSeparation(warehouses.size(), warehouseSpace, citySpace));
@@ -65,28 +65,19 @@ public class EmergencySupplyNetwork {
                     .append(cities.get(i).getId())
                     .append(getSpace(7 - cities.get(i).getId().length()))
                     .append("|");
-            int maxSpace = getWarehouseCostSpace(row);
             for (Double col : row) {
                 int space = String.valueOf(col).length(); // Longueur actuelle du nombre
-                int leftSpace = (warehouseSpace - space) / 2; // Espaces à gauche
-                int rightSpace = warehouseSpace - space - leftSpace; // Espaces à droite
+                int rightSpace = (int) Math.round(((double) warehouseSpace - space) /2) ; // Espaces à droite
+                int leftSpace = warehouseSpace -  rightSpace - space; // Espaces à gauche
 
-                couts.append(getSpace(leftSpace))
+                couts.append(getSpace(rightSpace))
                         .append(col)
-                        .append(getSpace(rightSpace))
+                        .append(getSpace(leftSpace))
                         .append("|");
             }
             System.out.println(couts);
         }
         System.out.println(getSeparation(warehouses.size(), warehouseSpace, citySpace) + "\n");
-    }
-
-    private String formatCell(String content, int cellWidth) {
-        int space = cellWidth - content.length(); // Espaces totaux à répartir
-        int leftSpace = space / 2;
-        int rightSpace = space - leftSpace;
-
-        return getSpace(leftSpace) + content + getSpace(rightSpace);
     }
 
     private String getTitle(){
@@ -96,7 +87,7 @@ public class EmergencySupplyNetwork {
         for (Warehouse warehouse : warehouses){
             title.append(" Warehouse ")
                     .append(warehouse.getId())
-                    .append("  ");
+                    .append(" |");
         }
         return title.toString();
     }
@@ -104,9 +95,10 @@ public class EmergencySupplyNetwork {
     private String getSeparation(int numbWarehouse, int warehouseSpace, int citySpace){
         String line = "";
         for (int i = 0; i < numbWarehouse; i++) {
-            for (int j = 0; j < warehouseSpace; j++) {
+            for (int j = 0; j < warehouseSpace; j++) {  // on met autant de "--" Warehouse 101
                 line += "-";
             }
+            line += "-";   // correspond a "|"
         }
         for (int i = 0; i < citySpace; i++) {
             line += "-";
