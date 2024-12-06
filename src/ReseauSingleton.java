@@ -5,7 +5,6 @@ import java.util.List;
 public class ReseauSingleton {
     // Instance unique
     private static ReseauSingleton instance;
-    // Exemple
 
     private List<City> cities = new ArrayList<>();
     private List<Warehouse> warehouses = new ArrayList<>();
