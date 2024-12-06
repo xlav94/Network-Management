@@ -26,7 +26,7 @@ public class EmergencySupplyNetwork {
         return matriceDeCout;
     }
 
-    // matrice warehouse/city
+    // matrice de cout
     private void matriceCout(){
         for (City city : cities){
             List<Double> row = new ArrayList<>();
