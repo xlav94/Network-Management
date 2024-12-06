@@ -1,7 +1,7 @@
 public class Warehouse extends Network {
     private double capacite;
 
-    public Warehouse(int id, Coordonnes<Integer, Integer> coordonne, double capacite) {
+    public Warehouse(String id, Coordonnes<Integer, Integer> coordonne, double capacite) {
         super(id, coordonne);
         this.capacite = capacite;
     }
