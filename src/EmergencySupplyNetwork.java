@@ -10,6 +10,7 @@ public class EmergencySupplyNetwork {
     public EmergencySupplyNetwork(){
         matriceCout();
         affichage();
+        Allocation allocation = new Allocation();
     }
 
     public List<List<Double>> getMatriceDeCout() {
@@ -26,6 +27,7 @@ public class EmergencySupplyNetwork {
             }
             matriceDeCout.add(row);
         }
+        ReseauSingleton.getInstance().setMatriceDeCout(matriceDeCout);
     }
 
     private double calculCost(double distance){
@@ -61,7 +63,7 @@ public class EmergencySupplyNetwork {
             StringBuilder couts = new StringBuilder();
             couts.append("City ")
                     .append(cities.get(i).getId())
-                    .append(getSpace(7 - getCitySpace()))
+                    .append(getSpace(7 - cities.get(i).getId().length()))
                     .append("|");
             int maxSpace = getWarehouseCostSpace(row);
             for (Double col : row) {
@@ -76,6 +78,15 @@ public class EmergencySupplyNetwork {
             }
             System.out.println(couts);
         }
+        System.out.println(getSeparation(warehouses.size(), warehouseSpace, citySpace) + "\n");
+    }
+
+    private String formatCell(String content, int cellWidth) {
+        int space = cellWidth - content.length(); // Espaces totaux à répartir
+        int leftSpace = space / 2;
+        int rightSpace = space - leftSpace;
+
+        return getSpace(leftSpace) + content + getSpace(rightSpace);
     }
 
     private String getTitle(){
@@ -112,20 +123,19 @@ public class EmergencySupplyNetwork {
     }
 
     private int getCitySpace(){
-        return String.valueOf(
-                cities.stream()
-                        .mapToInt(City::getId)
-                        .max()
-                        .orElse(0)
-        ).length();
+        return cities.stream()
+                .map(city -> city.getId())        // Obtenez l'ID en tant que chaîne
+                .mapToInt(String::length)        // Calculez la longueur de chaque ID
+                .max()                           // Trouvez la longueur maximale
+                .orElse(0);
     }
 
-    private int getWarehouseNameSpace(){
-        return String.valueOf(warehouses.stream()
-                .mapToInt(Warehouse::getId)
-                .max()
-                .orElse(0)
-        ).length();
+    private int getWarehouseNameSpace() {
+        return warehouses.stream()
+                .map(warehouse -> warehouse.getId()) // Obtenez l'ID en tant que chaîne
+                .mapToInt(String::length)          // Calculez la longueur de chaque ID
+                .max()                             // Trouvez la longueur maximale
+                .orElse(0);                        // Retournez 0 si la liste est vide
     }
 
     private int getWarehouseCostSpace(List<Double> row) {
