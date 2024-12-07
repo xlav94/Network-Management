@@ -26,8 +26,8 @@ public class Allocation {
             City currentCity = cityQueue.poll();
             while (0 < currentCity.getDemande()){
                 StringBuilder message = new StringBuilder();
-                int index = findWarehouse(matriceDeCout.get(cities.indexOf(currentCity)));
 
+                int index = findWarehouse(matriceDeCout.get(cities.indexOf(currentCity)));
                 Warehouse warehouse = avalaibleWarehouses.get(index);
 
                 double avalaibleRessources = warehouse.getCapacite();
@@ -35,48 +35,50 @@ public class Allocation {
 
                 double ressourcesAllocate;
 
-
+                // Si l'entrepot n'a pas assez de ressources
                 if (avalaibleRessources <= demande){
                     currentCity.setAllocation(currentCity.getAllocation() +  avalaibleRessources);  // ajoute les ressources alloue
                     currentCity.setDemande(currentCity.getDemande() -  avalaibleRessources);  // reduit la demande
-
-                    //avalaibleWarehouses.remove(warehouse); // l'entrepot n'est plus disponible
-
+                    // On change le cout associé a l'entrepot a Max_value dans la matrice de cout
                     for (int i = 0; i < matriceDeCout.size(); i++) {
                         matriceDeCout.get(i).set(index, Double.MAX_VALUE);
                     }
-
                     ressourcesAllocate = avalaibleRessources;
-
                     warehouse.setCapacite(0);
-
-
                 }
-
                 else{
                     currentCity.setAllocation(currentCity.getAllocation() +  avalaibleRessources);
                     currentCity.setDemande(0);  // reduit la demande
                     warehouse.setCapacite(warehouse.getCapacite() - demande);
                     ressourcesAllocate = demande;
                 }
-
-
                 message.append("Allocating resources for City ")
                         .append(currentCity.getId())
                         .append(" (Priority: ")
                         .append(currentCity.getPriorite())
                         .append(")\n")
-                        .append("Allocated " + ressourcesAllocate + " units from Warehouse ")
+                        .append("   Allocated " + ressourcesAllocate + " units from Warehouse ")
                         .append(warehouse.getId());
 
                 System.out.println(message);
             }
         }
+        warehouseCapacities();
+        // On met a jour les entrepots et les villes apres la phase d'allocation
+        ReseauSingleton.getInstance().setWarehouses(warehouses);
+        ReseauSingleton.getInstance().setCities(cities);
     }
 
     private int findWarehouse(List<Double> couts){
         Double minCost = Collections.min(couts);
         return couts.indexOf(minCost);
+    }
+
+    private void warehouseCapacities(){
+        System.out.println("\nRemaining Warehouse Capacities : ");
+        for (Warehouse warehouse : warehouses) {
+            System.out.println("    Warehouse " + warehouse.getId() + " : " + warehouse.getCapacite() + " units");
+        }
     }
 
 }
