@@ -10,7 +10,7 @@ public class EmergencySupplyNetwork {
     public EmergencySupplyNetwork(){
         matriceCout();
         affichage();
-        //Allocation allocation = new Allocation();
+        Allocation allocation = new Allocation();
     }
 
     public List<List<Double>> getMatriceDeCout() {
@@ -48,8 +48,8 @@ public class EmergencySupplyNetwork {
     }
 
     private void affichage() {
-        String title = "Graph Representation (Cost Matrix): ";
-        int citySpace = String.valueOf(getCitySpace()).length() + 12;
+        String title = "\nGraph Representation (Cost Matrix): ";
+        int citySpace = String.valueOf(getCityNameSpace()).length() + 12;
         int warehouseSpace = String.valueOf(getWarehouseNameSpace()).length() + 14;
 
         System.out.println(title);
@@ -114,7 +114,7 @@ public class EmergencySupplyNetwork {
         return spaces;
     }
 
-    private int getCitySpace(){
+    private int getCityNameSpace(){
         return cities.stream()
                 .map(city -> city.getId())        // Obtenez l'ID en tant que chaîne
                 .mapToInt(String::length)        // Calculez la longueur de chaque ID
@@ -128,16 +128,5 @@ public class EmergencySupplyNetwork {
                 .mapToInt(String::length)          // Calculez la longueur de chaque ID
                 .max()                             // Trouvez la longueur maximale
                 .orElse(0);                        // Retournez 0 si la liste est vide
-    }
-
-    private int getWarehouseCostSpace(List<Double> row) {
-        return String.valueOf(
-                        row.stream()
-                                .mapToDouble(Double::doubleValue) // Obtenez les valeurs double
-                                .max()                            // Trouvez le maximum
-                                .orElse(0)                        // Fournissez une valeur par défaut si vide
-                )
-                .replaceAll("\\.0+$", "") // Supprime les décimales inutiles
-                .length();                // Compte les caractères
     }
 }
