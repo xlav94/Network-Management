@@ -20,7 +20,7 @@ public class ReseauSingleton {
 
         Warehouse wX = new Warehouse("101", new Coordonnes<>(0, 10), 100);
         Warehouse wY = new Warehouse("102", new Coordonnes<>(9, 1), 50);
-        Warehouse wZ = new Warehouse("103", new Coordonnes<>(19, 1), 150);
+        Warehouse wZ = new Warehouse("103", new Coordonnes<>(19, 1), 125);
 
         cities.addAll(Arrays.asList(cityA, cityB, cityC, cityD));
         warehouses.addAll(Arrays.asList(wX, wY, wZ));
