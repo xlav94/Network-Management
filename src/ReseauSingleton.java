@@ -13,7 +13,7 @@ public class ReseauSingleton {
     // Constructeur privé pour empêcher l'instanciation
     private ReseauSingleton() {
         // Exemple
-        City cityA = new City("1", new Coordonnes <> (2, 7) , 70, "Medium");
+        City cityA = new City("1", new Coordonnes <> (2, 7) , 170, "Medium");
         City cityB = new City("2", new Coordonnes <> (4, 7) , 30, "High");
         City cityC = new City("3", new Coordonnes <> (9, 2) , 20, "Low");
         City cityD = new City("4", new Coordonnes <> (18, 2) , 50, "High");
