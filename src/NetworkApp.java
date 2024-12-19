@@ -3,5 +3,7 @@ public class NetworkApp {
         EmergencySupplyNetwork emergencySupplyNetwork = new EmergencySupplyNetwork();
 
         ResourceRedistribution resourceRedistribution = new ResourceRedistribution();
+
+        DynamicResourceSharing dynamicResourceSharing = new DynamicResourceSharing();
     }
 }

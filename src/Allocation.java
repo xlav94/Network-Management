@@ -52,6 +52,10 @@ public class Allocation {
                     warehouse.setCapacite(warehouse.getCapacite() - demande);
                     ressourcesAllocate = demande;
                 }
+
+                // Dit qu'elle entrepot a allouer ces ressource
+                currentCity.getWarehouses().add(warehouse.getId());
+
                 message.append("Allocating resources for City ")
                         .append(currentCity.getId())
                         .append(" (Priority: ")

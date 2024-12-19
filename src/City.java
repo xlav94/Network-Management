@@ -1,7 +1,11 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class City extends Network {
     private double demande;
     private String priorite;
     private double allocation = 0;
+    private List<String> warehouses = new ArrayList<>();
 
     public City(String id, Coordonnes <Integer, Integer> coordonnes, double demande, String priorite) {
         super(id, coordonnes);
@@ -31,6 +35,14 @@ public class City extends Network {
 
     public void setPriorite(String priorite) {
         this.priorite = priorite;
+    }
+
+    public List<String> getWarehouses() {
+        return warehouses;
+    }
+
+    public void setWarehouses(List<String> warehouses) {
+        this.warehouses = warehouses;
     }
 
     public String toString() {
