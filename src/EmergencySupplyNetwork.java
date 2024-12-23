@@ -6,13 +6,9 @@ public class EmergencySupplyNetwork {
     private List<City> cities = ReseauSingleton.getInstance().getCities();
     private List<Warehouse> warehouses = ReseauSingleton.getInstance().getWarehouses();
 
-    public EmergencySupplyNetwork(String inputFileName) {
-        // Initialisation et parsing
-        JsonGenerator jsonGenerator = new JsonGenerator();
-        jsonGenerator.parseInputFile(inputFileName);
+    private JsonGenerator jsonGenerator = ReseauSingleton.getInstance().getJsonFile();
 
-        this.cities = jsonGenerator.getCities();
-        this.warehouses = jsonGenerator.getWarehouses();
+    public EmergencySupplyNetwork() {
 
         // Calculer la matrice de coût
         matriceCout();

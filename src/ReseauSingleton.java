@@ -10,8 +10,13 @@ public class ReseauSingleton {
     private List<Warehouse> warehouses = new ArrayList<>();
     private List<List <Double>> matriceDeCout = new ArrayList<>();
 
+    private JsonGenerator jsonFile = new JsonGenerator();
+
     // Constructeur privé pour empêcher l'instanciation
-    private ReseauSingleton() {    }
+    private ReseauSingleton() {
+        cities = jsonFile.getCities();
+        warehouses = jsonFile.getWarehouses();
+    }
 
     public List<City> getCities() {
         return cities;
@@ -34,6 +39,10 @@ public class ReseauSingleton {
 
     public void setMatriceDeCout(List<List<Double>> matriceDeCout) {
         this.matriceDeCout = matriceDeCout;
+    }
+
+    public JsonGenerator getJsonFile() {
+        return jsonFile;
     }
 
     // Méthode pour obtenir l'instance unique

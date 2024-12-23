@@ -13,15 +13,22 @@ public class JsonGenerator {
     private List<City> cities;
     private List<Warehouse> warehouses;
     private List<List<Double>> matriceDeCout;
+    private String inputFileName;
 
     public JsonGenerator() {
-        this.cities = ReseauSingleton.getInstance().getCities();
-        this.warehouses = ReseauSingleton.getInstance().getWarehouses();
-        this.matriceDeCout = new ArrayList<>();
+        parseInputFile();
 
     }
 
-    public void parseInputFile(String inputFileName) {
+    public String getInputFileName() {
+        return inputFileName;
+    }
+
+    public void setInputFileName(String inputFileName) {
+        this.inputFileName = inputFileName;
+    }
+
+    public void parseInputFile() {
         try (BufferedReader reader = new BufferedReader(new FileReader(inputFileName))) {
             String line;
             while ((line = reader.readLine()) != null) {
