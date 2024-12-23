@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class EmergencySupplyNetwork {
     private List<List<Double>> matriceDeCout = new ArrayList<>();
@@ -7,15 +6,27 @@ public class EmergencySupplyNetwork {
     private List<City> cities = ReseauSingleton.getInstance().getCities();
     private List<Warehouse> warehouses = ReseauSingleton.getInstance().getWarehouses();
 
-    public EmergencySupplyNetwork(){
+    private JsonGenerator jsonGenerator = ReseauSingleton.getInstance().getJsonFile();
+
+    public EmergencySupplyNetwork() {
+
+        // Calculer la matrice de coût
         matriceCout();
-        affichage();
-        Allocation allocation = new Allocation();
+
+        // Passer la matrice à JsonGenerator
+        jsonGenerator.setMatriceDeCout(matriceDeCout);
+
+        // Générer le JSON
+        jsonGenerator.generateCostMatrixJson("Task1And2.json");
     }
+
+
 
     public List<List<Double>> getMatriceDeCout() {
         return matriceDeCout;
     }
+
+
 
     // matrice de cout
     private void matriceCout(){

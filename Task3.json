@@ -1,0 +1,23 @@
+{
+  "Task 3": {
+    "Resource Redistribution": {
+      "Transfers": [
+        {
+          "From": "Warehouse 103",
+          "To": "Warehouse 101",
+          "Units": 50.0
+        },
+        {
+          "From": "Warehouse 103",
+          "To": "Warehouse 102",
+          "Units": 10.0
+        }
+      ],
+      "Final Resource Levels": {
+        "Warehouse 101": 50.0,
+        "Warehouse 102": 30.0,
+        "Warehouse 103": 50.0
+      }
+    }
+  }
+}
