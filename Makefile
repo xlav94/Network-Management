@@ -15,32 +15,27 @@ MAIN_CLASS = NetworkApp
 # Input file for the program
 INPUT_FILE = TestCase1.txt
 
-# Java source files
-SOURCES = $(wildcard $(SRC_DIR)/*.java)
-
-# Compiled class files
-CLASSES = $(patsubst $(SRC_DIR)/%.java, $(OUT_DIR)/%.class, $(SOURCES))
-
 # Default target: Compile all sources
-all: $(CLASSES)
-
-# Rule to compile .java files into the output directory with classpath
-$(OUT_DIR)/%.class: $(SRC_DIR)/%.java
+.PHONY: all
+all:
 	@mkdir -p $(OUT_DIR)
-	$(JAVAC) -cp $(LIBS) -d $(OUT_DIR) $<
+	$(JAVAC) -cp $(LIBS) -d $(OUT_DIR) $(SRC_DIR)/*.java
 
 # Run the program
+.PHONY: run
 run: all
 	$(JAVA) -cp .:$(LIBS):$(OUT_DIR) $(MAIN_CLASS) $(INPUT_FILE)
 
 # Clean up compiled files
+.PHONY: clean
 clean:
 	rm -rf $(OUT_DIR)
 
-# Help target for instructions
+# Display help message
+.PHONY: help
 help:
 	@echo "Available targets:"
-	@echo "  all    - Compile all source files"
+	@echo "  all    - Compile the NetworkApp.java file"
 	@echo "  run    - Compile and run the program with $(INPUT_FILE)"
 	@echo "  clean  - Remove compiled files"
 	@echo "  help   - Show this help message"
