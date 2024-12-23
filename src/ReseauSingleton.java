@@ -9,14 +9,22 @@ public class ReseauSingleton {
     private List<City> cities = new ArrayList<>();
     private List<Warehouse> warehouses = new ArrayList<>();
     private List<List <Double>> matriceDeCout = new ArrayList<>();
-
+    private static String filePath;
     private JsonGenerator jsonFile = new JsonGenerator();
 
     // Constructeur privé pour empêcher l'instanciation
     private ReseauSingleton() {
-        cities = jsonFile.getCities();
-        warehouses = jsonFile.getWarehouses();
+        if (filePath == null || filePath.isBlank()) {
+            throw new IllegalStateException("File path has not been set.");
+        }
+
+        InputParser parser = new InputParser();
+        parser.parseInputFile(filePath);
+        parser.populateJsonGenerator(jsonFile);
+        cities = parser.getCities();
+        warehouses = parser.getWarehouses();
     }
+
 
     public List<City> getCities() {
         return cities;
@@ -43,6 +51,10 @@ public class ReseauSingleton {
 
     public JsonGenerator getJsonFile() {
         return jsonFile;
+    }
+
+    public static void setFilePath(String path) {
+        filePath = path;
     }
 
     // Méthode pour obtenir l'instance unique
