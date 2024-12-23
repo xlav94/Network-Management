@@ -1,0 +1,29 @@
+{
+  "Task 1 and 2": {
+    "Resource Allocation": [
+      {
+        "City": "City 1",
+        "Priority": "High",
+        "Allocated": 100.0,
+        "Warehouse": "Warehouse 101"
+      },
+      {
+        "City": "City 2",
+        "Priority": "Medium",
+        "Allocated": 50.0,
+        "Warehouse": "Warehouse 101"
+      },
+      {
+        "City": "City 3",
+        "Priority": "Low",
+        "Allocated": 50.0,
+        "Warehouse": "Warehouse 102"
+      }
+    ],
+    "Remaining Capacities": {
+      "Warehouse 101": 0.0,
+      "Warehouse 102": 0.0,
+      "Warehouse 103": 110.0
+    }
+  }
+}

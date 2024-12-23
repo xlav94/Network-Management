@@ -11,20 +11,7 @@ public class ReseauSingleton {
     private List<List <Double>> matriceDeCout = new ArrayList<>();
 
     // Constructeur privé pour empêcher l'instanciation
-    private ReseauSingleton() {
-        // Exemple
-        City cityA = new City("1", new Coordonnes <> (2, 7) , 170, "Medium");
-        City cityB = new City("2", new Coordonnes <> (4, 7) , 30, "High");
-        City cityC = new City("3", new Coordonnes <> (9, 2) , 20, "Low");
-        City cityD = new City("4", new Coordonnes <> (18, 2) , 50, "High");
-
-        Warehouse wX = new Warehouse("101", new Coordonnes<>(0, 10), 100);
-        Warehouse wY = new Warehouse("102", new Coordonnes<>(9, 1), 50);
-        Warehouse wZ = new Warehouse("103", new Coordonnes<>(19, 1), 125);
-
-        cities.addAll(Arrays.asList(cityA, cityB, cityC, cityD));
-        warehouses.addAll(Arrays.asList(wX, wY, wZ));
-    }
+    private ReseauSingleton() {    }
 
     public List<City> getCities() {
         return cities;

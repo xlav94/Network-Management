@@ -23,6 +23,9 @@ public class ResourceRedistribution {
         for (Warehouse warehouse : warehouses) {
             System.out.println("Warehouse " + warehouse.getId() + " : " + warehouse.getCapacite() + " units");
         }
+        JsonGenerator jsonGenerator = new JsonGenerator();
+        jsonGenerator.generateResourceAllocationJson("Output.json");
+
     }
 
     private void initHeap(){
