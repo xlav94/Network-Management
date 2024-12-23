@@ -19,6 +19,8 @@ public class JsonGenerator {
 
     }
 
+
+
     public String getInputFileName() {
         return inputFileName;
     }
@@ -91,6 +93,55 @@ public class JsonGenerator {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             gson.toJson(Map.of("Task 1 and 2", task1And2), writer);
             System.out.println("Resource Allocation JSON written to " + fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void generateResourceRedistributionJson(String fileName, List<Map<String, Object>> transfers, Map<String, Double> finalResourceLevels) {
+        // Ensure the transfers list contains multiple entries
+        if (transfers == null || transfers.isEmpty()) {
+            System.out.println("No transfers recorded.");
+            return;
+        }
+
+        // Prepare the "Resource Redistribution" structure
+        Map<String, Object> resourceRedistribution = Map.of(
+                "Transfers", transfers,
+                "Final Resource Levels", finalResourceLevels
+        );
+
+        // Prepare the "Task 3" structure
+        Map<String, Object> task3 = Map.of("Task 3", Map.of("Resource Redistribution", resourceRedistribution));
+
+        // Write the JSON to a file
+        try (FileWriter writer = new FileWriter(fileName)) {
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            gson.toJson(task3, writer);
+            System.out.println("Resource Redistribution JSON written to " + fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void generateDynamicResourceSharingJson(String fileName) {
+        DynamicResourceSharing dynamicResourceSharing = new DynamicResourceSharing();
+
+        // Build JSON structure for Task 4 using LinkedHashMap
+        Map<String, Object> dynamicResourceSharingData = new LinkedHashMap<>();
+        dynamicResourceSharingData.put("Initial Clusters", dynamicResourceSharing.getClusters());
+        dynamicResourceSharingData.put("Merging Steps", dynamicResourceSharing.getMergingSteps());
+        dynamicResourceSharingData.put("Queries", dynamicResourceSharing.getQueries());
+
+        Map<String, Object> task4 = new LinkedHashMap<>();
+        task4.put("Task 4", Map.of("Dynamic Resource Sharing", dynamicResourceSharingData));
+
+        // Write to JSON
+        try (FileWriter writer = new FileWriter(fileName)) {
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            gson.toJson(task4, writer);
+            System.out.println("Dynamic Resource Sharing JSON written to " + fileName);
         } catch (IOException e) {
             e.printStackTrace();
         }

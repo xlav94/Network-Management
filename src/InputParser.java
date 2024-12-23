@@ -46,7 +46,7 @@ public class InputParser {
     }
 
     private void parseCity(String line) {
-        String regex = "City \\d+: ID\\s*=\\s*(\\d+),\\s*Coordinates\\s*=\\s*\\((\\d+),\\s*(\\d+)\\),\\s*Demand\\s*=\\s*(\\d+) units,\\s*Priority\\s*=\\s*(\\w+)";
+        String regex = "City \\w+: ID\\s*=\\s*(\\d+),\\s*Coordinates\\s*=\\s*\\((\\d+),\\s*(\\d+)\\),\\s*Demand\\s*=\\s*(\\d+) units,\\s*Priority\\s*=\\s*(\\w+)";
         Matcher matcher = Pattern.compile(regex).matcher(line);
         if (matcher.find()) {
             String id = matcher.group(1);

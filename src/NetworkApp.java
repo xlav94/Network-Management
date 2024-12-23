@@ -14,11 +14,16 @@ public class NetworkApp {
         // Initialize singleton after setting file path
         ReseauSingleton singleton = ReseauSingleton.getInstance();
 
-
-
         // Now initialize other components
         EmergencySupplyNetwork emergencySupplyNetwork = new EmergencySupplyNetwork();
         ResourceRedistribution resourceRedistribution = new ResourceRedistribution();
         DynamicResourceSharing dynamicResourceSharing = new DynamicResourceSharing();
+
+        JsonGenerator jsonGenerator = new JsonGenerator();
+
+        // Generate Task 4 JSON
+        jsonGenerator.generateDynamicResourceSharingJson("Task4.json");
+
+        System.out.println("Task 4 JSON generation completed.");
     }
 }
