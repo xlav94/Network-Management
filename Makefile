@@ -13,13 +13,14 @@ OUT_DIR = out
 MAIN_CLASS = NetworkApp
 
 # Input file for the program
-INPUT_FILE = TestCase1.txt
+INPUT_FILE = TestCase.txt
 
 # Default target: Compile all sources
 .PHONY: all
 all:
 	@mkdir -p $(OUT_DIR)
 	$(JAVAC) -cp $(LIBS) -d $(OUT_DIR) $(SRC_DIR)/*.java
+
 
 # Run the program
 .PHONY: run

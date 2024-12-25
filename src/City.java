@@ -8,7 +8,7 @@ public class City extends Network {
     private String priorite;
     private double allocation = 0;
     private List<String> warehouses = new ArrayList<>();
-    private Map<String, Double> warehouseAllocations = new LinkedHashMap<>(); // Detailed allocation
+    private Map<String, Double> warehouseAllocations = new LinkedHashMap<>();
 
 
     public City(String id, Coordonnes <Integer, Integer> coordonnes, double demande, String priorite) {

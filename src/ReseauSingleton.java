@@ -20,7 +20,7 @@ public class ReseauSingleton {
 
         InputParser parser = new InputParser();
         parser.parseInputFile(filePath);
-        parser.populateJsonGenerator(jsonFile);
+        parser.settingFromParser(jsonFile);
         cities = parser.getCities();
         warehouses = parser.getWarehouses();
     }
@@ -59,6 +59,7 @@ public class ReseauSingleton {
 
     // Méthode pour obtenir l'instance unique
     public static ReseauSingleton getInstance() {
+
         if (instance == null) {
             instance = new ReseauSingleton();
         }

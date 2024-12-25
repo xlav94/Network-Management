@@ -6,21 +6,13 @@ public class EmergencySupplyNetwork {
     private List<City> cities = ReseauSingleton.getInstance().getCities();
     private List<Warehouse> warehouses = ReseauSingleton.getInstance().getWarehouses();
 
-    private JsonGenerator jsonGenerator = ReseauSingleton.getInstance().getJsonFile();
+    //private JsonGenerator jsonGenerator = ReseauSingleton.getInstance().getJsonFile();
 
     public EmergencySupplyNetwork() {
-
         // Calculer la matrice de coût
         matriceCout();
-
-        // Passer la matrice à JsonGenerator
-        jsonGenerator.setMatriceDeCout(matriceDeCout);
-
-        // Générer le JSON
-        jsonGenerator.generateCostMatrixJson("Task1And2.json");
+        //affichage();
     }
-
-
 
     public List<List<Double>> getMatriceDeCout() {
         return matriceDeCout;
@@ -58,6 +50,7 @@ public class EmergencySupplyNetwork {
         return Math.sqrt(Math.pow(warehouse.getX() - city.getX(), 2) + Math.pow(warehouse.getY() - city.getY(), 2));
     }
 
+    // affiche le tableau
     private void affichage() {
         String title = "\nGraph Representation (Cost Matrix): ";
         int citySpace = String.valueOf(getCityNameSpace()).length() + 12;

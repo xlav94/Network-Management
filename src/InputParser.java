@@ -15,17 +15,14 @@ public class InputParser {
     }
 
     public void parseInputFile(String filePath) {
-        System.out.println("Parsing Input File: " + filePath);
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             boolean isCities = false, isWarehouses = false;
-
             while ((line = reader.readLine()) != null) {
-                line = line.trim(); // Trim whitespace
+                line = line.trim();
                 if (line.isEmpty()) {
-                    continue; // Skip empty lines
+                    continue; // skip lignes vide
                 }
-
                 if (line.startsWith("Cities:")) {
                     isCities = true;
                     isWarehouses = false;
@@ -45,6 +42,8 @@ public class InputParser {
         }
     }
 
+    // utilisation de regex : ce site nous a aidé à naviguer l'utilisation
+    // https://www.vogella.com/tutorials/JavaRegularExpressions/article.html
     private void parseCity(String line) {
         String regex = "City \\w+: ID\\s*=\\s*(\\d+),\\s*Coordinates\\s*=\\s*\\((\\d+),\\s*(\\d+)\\),\\s*Demand\\s*=\\s*(\\d+) units,\\s*Priority\\s*=\\s*(\\w+)";
         Matcher matcher = Pattern.compile(regex).matcher(line);
@@ -52,10 +51,10 @@ public class InputParser {
             String id = matcher.group(1);
             int x = Integer.parseInt(matcher.group(2));
             int y = Integer.parseInt(matcher.group(3));
-            int demand = Integer.parseInt(matcher.group(4));
+            int demande = Integer.parseInt(matcher.group(4));
             String priority = matcher.group(5);
-
-            cities.add(new City(id, new Coordonnes<>(x, y), demand, priority));
+            cities.add(new City(id, new Coordonnes<>(x, y), demande, priority));
+            //System.out.println("IND " + id);
         } else {
             System.err.println("Invalid City line format: " + line);
         }
@@ -68,14 +67,13 @@ public class InputParser {
             String id = matcher.group(1);
             int x = Integer.parseInt(matcher.group(2));
             int y = Integer.parseInt(matcher.group(3));
-            int capacity = Integer.parseInt(matcher.group(4));
-
-            warehouses.add(new Warehouse(id, new Coordonnes<>(x, y), capacity));
+            int capacite = Integer.parseInt(matcher.group(4));
+            warehouses.add(new Warehouse(id, new Coordonnes<>(x, y), capacite));
         } else {
             System.err.println("Invalid Warehouse line format: " + line);
         }
     }
-    public void populateJsonGenerator(JsonGenerator jsonGenerator) {
+    public void settingFromParser(JsonGenerator jsonGenerator) {
         jsonGenerator.setCities(cities);
         jsonGenerator.setWarehouses(warehouses);
     }
